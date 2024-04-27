@@ -30,7 +30,26 @@ class LinkedList:
     new_node = Node(data)
     new_node.next = prev_node.next
     prev_node.next = new_node
-
+  
+  def insert_before(self, next_node: Node, data):
+    print("dct:", next_node, data)
+    if next_node is None:
+      print("Наступного вузла не існує.")
+      return
+    cur_node = self.head
+    prev_node = None
+    while cur_node != next_node:
+      if cur_node is None:
+        return
+      prev_node = cur_node
+      cur_node = cur_node.next
+    new_node = Node(data)
+    new_node.next = next_node
+    if prev_node:
+      prev_node.next = new_node
+    else:
+      self.head = new_node
+    
   def delete_node(self, key: int):
     cur = self.head
     if cur and cur.data == key:
@@ -73,6 +92,12 @@ llist.insert_at_end(25)
 
 # Друк зв'язного списку
 print("Зв'язний список:")
+llist.print_list()
+
+# add
+llist.insert_before(llist.search_element(20), 19)
+
+print("\nЗв'язний список після вставкеи з даними 19:")
 llist.print_list()
 
 # Видаляємо вузол
